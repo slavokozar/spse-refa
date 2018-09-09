@@ -1,0 +1,19 @@
+
+#login-panel{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 140px);
+    text-align: center;
+}
+
+#login-panel img{
+    width: 20rem;
+    max-width: 100%;
+}
+
+@media (max-width: 768px) {
+    #login-panel .logo{
+        display: none;
+    }
+}

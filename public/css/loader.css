@@ -1,0 +1,128 @@
+#page-loader-wrapper{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,.85);
+    z-index: 5000;
+}
+
+.loader{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    height: 200px;
+    width: 200px;
+    text-align: center; margin: auto;
+}
+
+.loader .spinner{
+    position:relative;
+    width: 200px;
+    height: 200px;
+
+
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 3000ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+
+    -moz-animation-name: spin;
+    -moz-animation-duration: 3000ms;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+
+    -ms-animation-name: spin;
+    -ms-animation-duration: 3000ms;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+}
+
+
+
+.loader .point{
+    position:absolute;
+    top:95px;
+    left:0px;
+
+    height:10px;
+    width:200px;
+}
+
+
+
+.loader .point2{;
+    -ms-transform: rotate(20deg); /* IE 9 */
+    -webkit-transform: rotate(20deg); /* Chrome, Safari, Opera */
+    transform: rotate(20deg);
+
+}
+
+.loader .point3{
+    -ms-transform: rotate(40deg); /* IE 9 */
+    -webkit-transform: rotate(40deg); /* Chrome, Safari, Opera */
+    transform: rotate(40deg);
+}
+
+.loader .point4{
+    -ms-transform: rotate(60deg); /* IE 9 */
+    -webkit-transform: rotate(60deg); /* Chrome, Safari, Opera */
+    transform: rotate(60deg);
+}
+
+.loader .point div{
+    margin-left:190px;
+    background: #fff;
+}
+
+.loader .point1 div{
+    width:10px;
+    height:10px;
+    border-radius:5px;
+}
+
+.loader .point2 div{
+    width:8px;
+    height:8px;
+    border-radius:4px;
+}
+
+.loader .point3 div{
+    width:6px;
+    height:6px;
+    border-radius:3px;
+}
+
+.loader .point4 div{
+    width:4px;
+    height:4px;
+    border-radius:2px;
+}
+
+.loader .logo{
+    border-radius:100px;
+    /*border:1px solid #fff;*/
+    margin: -190px 0 0 10px;
+    width: 180px;
+    height: 180px;
+
+    background-image: url('/css/logo_spse.png');
+    background-size: 180px 180px;
+    background-position: center center;
+}
+
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(-360deg);
+    }
+}
+
+
