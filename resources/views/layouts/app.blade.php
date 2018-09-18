@@ -95,7 +95,7 @@
                     </a>
                 </div>
                 <div class="text-center">
-                    &copy; 2018 <a href="https://spse-po.sk">SPSE Presov</a> & <a href="https://slavokozar.sk">Slavo Kozar</a>
+                    &copy; 2018 <a href="https://spse-po.sk">SPŠE Prešov</a> & <a href="https://slavokozar.sk">Ing. Slavomír Kožár jr.</a>
                 </div>
         </div>
     </footer>
