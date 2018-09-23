@@ -30,7 +30,7 @@
                             <div class="col-md-12">
 
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-4 control-label">aktuálne heslo</label>
+                                    <label for="inputEmail3" class="col-sm-4 control-label">Aktuálne heslo</label>
                                     <div class="col-sm-8">
                                         <input type="password" name="old_password" class="form-control" id="inputEmail3">
                                     </div>
@@ -39,7 +39,7 @@
                                 <hr/>
 
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-4 control-label">nové heslo</label>
+                                    <label for="inputPassword3" class="col-sm-4 control-label">Nové heslo</label>
                                     <div class="col-sm-8">
                                         <input type="password" name="new_password" class="form-control" id="inputPassword3">
                                     </div>
@@ -47,7 +47,7 @@
 
 
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-4 control-label">nové heslo znova</label>
+                                    <label for="inputPassword3" class="col-sm-4 control-label">Nové heslo znova</label>
                                     <div class="col-sm-8">
                                         <input type="password" name="new_password_confirmation" class="form-control" id="inputPassword3">
                                     </div>

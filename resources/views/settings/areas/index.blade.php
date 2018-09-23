@@ -11,7 +11,7 @@
 
     <h1>{{trans('settings.areas.heading')}}</h1>
     @if(trans('settings.areas.help') != null)
-        <div class="alert alert-info" role="alert">{{trans('settings.areas.help')}}</div>
+        <div class="alert alert-info" role="alert">Nastavenie systému</div>
     @endif
     <div class="row">
         <div class="col-sm-12 text-right lead">

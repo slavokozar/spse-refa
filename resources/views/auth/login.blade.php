@@ -47,7 +47,7 @@
                 <div class="form-group">
                     <div class="checkbox text-center">
                         <label>
-                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Zapamataj si prihlasenie
+                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Zapamätaj si prihlásenie
                         </label>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                 <a href="{{ action('HelpController@index') }}">
                     <i class="fa fa-4x fa-question-circle" aria-hidden="true"></i>
                     </br>
-                    nápoveda
+                    Nápoveda
                 </a>
             </div>
         </div>

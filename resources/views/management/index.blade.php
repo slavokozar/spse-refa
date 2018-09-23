@@ -109,7 +109,7 @@
                                     @endforeach
                                 </div>
                                 <div class="col-xs-12 col-sm-3 col-sm-pull-7 text-muted text-middle">
-                                    qwerqw erqw erq wer
+                                    
                                     {{$ticket->statuses()->where('status',1)->first()->description}}
                                 </div>
                             </div>
@@ -121,7 +121,7 @@
                 {!! $tickets->render() !!}
         </div>
         @elseif(Auth::user()->isAdmin())
-            <div class="alert alert-warning text-center" role="alert">Nemate vytvorene ziadne poziadavky!</div>
+            <div class="alert alert-warning text-center" role="alert">Nemáte vytvorené žiadne požiadavky!</div>
         @endif
     </div>
     </div>

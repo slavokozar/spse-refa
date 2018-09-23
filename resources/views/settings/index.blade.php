@@ -2,7 +2,7 @@
 
 @section('settings-content')
 
-    <h1>{{trans('settings.heading')}}</h1>
+    <h1>Nastavenia</h1>
     <div>
         <a class="btn btn-link"
            href="{{action('Settings\ManagersController@index')}}">{{ trans('settings.managers.link') }}</a>

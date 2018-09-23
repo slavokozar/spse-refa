@@ -4,7 +4,7 @@
     <div class="container">
 <h2>O systéme</h2>
 <p>
-<strong>ReFa</strong> je systém určený pre profesorov SPŠE v Prešove slúžiaci pre nahlasovania nefunkčnosti HW alebo SW prípadne požiadavke doinštalovania SW alebo HW. Systém slúži aj na evidovanie, upozorňovanie a riešenie vzniknutých porúch.
+<strong>ReFa</strong> je systém určený pre profesorov SPŠE v Prešove slúžiaci pre nahlasovania nefunkčnosti HW alebo SW prípadne pre požiadavku doinštalovania SW alebo HW. Systém slúži aj na evidovanie, upozorňovanie a riešenie vzniknutých porúch.
 </p>
 <h2>Správa LAN infraštruktúry  SPŠE</h2>
 <p>Správa LAN infraštruktúry v laboratóriách, odborných učebniach a kabinetoch je zabezpečená osobami, ktoré majú odstupňované kompetencie, čím je zabezpečená rôzna úroveň správy.<p>

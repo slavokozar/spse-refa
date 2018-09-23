@@ -15,7 +15,7 @@
                 </div>
 
                 <div style="margin-bottom: 2rem">
-                    asdfpasdfop asdfnl asjdh ajshdfjk adhsjlfk asd
+                    
                     {{$ticketObj->statuses()->where('status',1)->first()->description}}
                 </div>
                 <h3>História zmien</h3>
