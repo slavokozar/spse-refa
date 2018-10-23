@@ -29,6 +29,6 @@ class Ticket extends Model
     }
 
     public function status(){
-        return $this->statuses()->get()->last();
+        return $this->statuses()->orderBy('created_at', 'desc')->limit(1);
     }
 }

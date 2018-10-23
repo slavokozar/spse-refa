@@ -29,13 +29,32 @@ class User extends Authenticatable
     }
 
     public function tickets(){
-        return $this->hasMany('App\Ticket');
+        return $this->hasMany('App\Ticket', 'user_id');
     }
 
     public function adminTickets(){
         return $this->hasManyThrough('App\Ticket', 'App\Area');
+    }
+
+
+    public function processingTickets(){
+        $user = $this;
+        return Ticket::whereHas('status', function($query) use ($user){
+             $query
+                 ->where('user_id', $user->id)
+                 ->where('status', 2);
+        })->count();
+    }
+
+    public function transferedTickets(){
 
     }
+
+    public function solvedTickets(){
+
+    }
+
+
 
     public function isAdmin(){
 

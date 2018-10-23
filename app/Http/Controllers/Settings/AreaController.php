@@ -9,6 +9,7 @@ use App\Models\User;
 
 use App\Notifications\Manager\ManagerAttached;
 
+use App\Notifications\Manager\ManagerDetached;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -37,8 +38,35 @@ class User extends Authenticatable
 
     public function adminTickets(){
         return $this->hasManyThrough('App\Models\Ticket', 'App\Models\Area');
-
     }
+
+    public function processingTickets(){
+        return $tickets = Ticket::select(['*',])
+            ->whereRaw('(select "status" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [2])
+            ->whereRaw('(select "user_id" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [$this->id])
+            ->count();
+    }
+
+    public function transferedTickets(){
+        return $tickets = Ticket::select(['*',])
+            ->whereRaw('(select "status" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [3])
+            ->whereRaw('(select "user_id" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [$this->id])
+            ->count();
+    }
+
+    public function solvedTickets(){
+        return $tickets = Ticket::select(['*',])
+            ->whereRaw('(select "status" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [4])
+            ->whereRaw('(select "user_id" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [$this->id])
+            ->count();
+    }
+
+//    public function firstReactionTime(){
+//        return $tickets = Ticket::select(['*',])
+//            ->whereRaw('(select "status" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [4])
+//
+//            ->count();
+//    }
 
     public function isAdmin(){
 

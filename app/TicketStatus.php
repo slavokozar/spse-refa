@@ -52,7 +52,7 @@ class TicketStatus extends Model
             case 3 :    return 'transfered';
                         break;
 
-            case 4 :    return 'done';
+            case 4 :    return 'solved';
                         break;
         }
     }
