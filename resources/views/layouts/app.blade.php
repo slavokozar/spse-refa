@@ -31,7 +31,17 @@
                     @endif
 
                     @if(Auth::user()->isSuperAdmin())
-                        <li class="hidden-xs"><a href="{{ action('StatsController@users') }}">Statistika uzivatelov</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Statistiky <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{{ action('StatsController@users') }}">Uzivatelia</a>
+                                </li>
+                                <li>
+                                    <a href="{{ action('StatsController@areas') }}">Miestnosti</a>
+                                </li>
+                            </ul>
+                        </li>
 
                         <li class="hidden-xs"><a href="{{ action('Settings\SettingsController@index') }}">Nastavenia</a></li>
 

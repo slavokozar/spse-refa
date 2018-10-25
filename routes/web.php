@@ -35,6 +35,7 @@ Route::get('/', function () {
 //  Settings
 
     Route::get('stats/users', 'StatsController@users');
+    Route::get('stats/areas', 'StatsController@areas');
 
 
     Route::get(trans('routes.settings.index'), 'Settings\SettingsController@index');

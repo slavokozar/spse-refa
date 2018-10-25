@@ -15,6 +15,12 @@ class Area extends Model
         return $this->hasMany('App\Models\Ticket');
     }
 
+    public function solvedTickets(){
+        return $this->tickets()->whereHas('status', function($query) {
+            return $query->where('status', 4);
+        });
+    }
+
     public function managers(){
         return $this->belongsToMany('App\Models\User')->withPivot('level');
     }
