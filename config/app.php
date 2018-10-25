@@ -226,6 +226,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'UserStatsService' => Facades\App\Services\UserStatsService::class,
+        'TimeService' => Facades\App\Services\TimeService::class,
+
     ],
 
 ];

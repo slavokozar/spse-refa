@@ -11,6 +11,8 @@ class TicketStatus extends Model
 
     protected $fillable = ['ticket_id','user_id','status','level','description'];
 
+    protected $hidden = ['deleted_at','updated_at'];
+
     public function ticket(){
         return $this->belongsTo('App\Ticket');
     }

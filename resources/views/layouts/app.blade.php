@@ -26,9 +26,9 @@
 
                     <li><a href="{{ action('Tickets\TicketController@index') }}">Moje požiadavky</a></li>
 
-                    {{--@if(Auth::user()->isAdmin())--}}
+                    @if(Auth::user()->isAdmin())
                         <li><a href="{{ action('Management\TicketController@index') }}">Správa požiadaviek</a></li>
-                    {{--@endif--}}
+                    @endif
 
                     @if(Auth::user()->isSuperAdmin())
                         <li class="hidden-xs"><a href="{{ action('StatsController@users') }}">Statistika uzivatelov</a></li>

@@ -12,9 +12,6 @@ class StatsController extends Controller
     {
         $users = User::get();
 
-//        $userObj = User::where('email', 'mitrova@spse-po.sk')->first();
-//        return $userObj->transferedTickets();
-
         return view('stats/users', compact(['users']));
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Ticket extends Model
 {
@@ -10,6 +11,12 @@ class Ticket extends Model
 
     protected $fillable = ['area_id', 'pc', 'user_id'];
 
+    protected $hidden = ['deleted_at','updated_at'];
+
+    public function getCreatedAtAttribute($value){
+        setlocale(LC_TIME, 'Slovak');
+        return Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('H:i d. m. Y');
+    }
 
     public function user(){
         return $this->belongsTo('App\Models\User');

@@ -1,86 +1,48 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: slavo
+ * Date: 26.10.2018
+ * Time: 1:10
+ */
 
-namespace App\Models;
+namespace App\Services;
 
-use Carbon\Carbon;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\DB;
 
-class User extends Authenticatable
+use App\Models\Ticket;
+
+class UserStatsService
 {
-    use Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    public function areas()
-    {
-        return $this->belongsToMany('App\Models\Area')->withPivot('level');
-    }
-
-    public function tickets()
-    {
-        return $this->hasMany('App\Models\Ticket');
-    }
-
-    public function statuses()
-    {
-        return $this->hasMany('App\Models\TicketStatus');
-    }
-
-    public function adminTickets()
-    {
-        return $this->hasManyThrough('App\Models\Ticket', 'App\Models\Area');
-    }
-
-    public function processingTickets()
+    public function processingTickets($user)
     {
         return $tickets = Ticket::select(['*',])
             ->whereRaw('(select "status" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [2])
-            ->whereRaw('(select "user_id" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [$this->id])
+            ->whereRaw('(select "user_id" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [$user->id])
             ->count();
     }
 
-    public function transferedTickets()
+    public function transferedTickets($user)
     {
         return $tickets = Ticket::select(['*',])
             ->whereRaw('(select "status" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [3])
-            ->whereRaw('(select "user_id" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [$this->id])
+            ->whereRaw('(select "user_id" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [$user->id])
             ->count();
     }
 
-    public function solvedTickets()
+    public function solvedTickets($user)
     {
         return $tickets = Ticket::select(['*',])
             ->whereRaw('(select "status" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [4])
-            ->whereRaw('(select "user_id" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [$this->id])
+            ->whereRaw('(select "user_id" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [$user->id])
             ->count();
     }
 
-    public function firstReactionAfterCreationTime()
+    private function firstReactionAfterCreationTime($user)
     {
         $sum = 0;
         $count = 0;
 
-        $user = $this;
-
-        $statuses = $this->statuses()
+        $statuses = $user->statuses()
             ->whereHas('ticket', function ($query) use ($user) {
                 return $query->where('user_id', '!=', $user->id);
             })->with('ticket')->get();
@@ -105,14 +67,12 @@ class User extends Authenticatable
         return $count > 0 ? $sum / $count : null;
     }
 
-    public function firstReactionAfterTransferTime()
+    private function firstReactionAfterTransferTime($user)
     {
         $sum = 0;
         $count = 0;
 
-        $user = $this;
-
-        $statuses = $this->statuses()
+        $statuses = $user->statuses()
             ->whereHas('ticket', function ($query) use ($user) {
                 return $query->where('user_id', '!=', $user->id);
             })->with('ticket')->get();
@@ -140,9 +100,9 @@ class User extends Authenticatable
         return $count > 0 ? ($sum / $count) : null;
     }
 
-    public function firstReactionTime(){
-        $afterCreation = $this->firstReactionAfterCreationTime();
-        $afterTransfer = $this->firstReactionAfterTransferTime();
+    public function firstReactionTime($user){
+        $afterCreation = $this->firstReactionAfterCreationTime($user);
+        $afterTransfer = $this->firstReactionAfterTransferTime($user);
 
 
         if($afterCreation !== null and $afterTransfer !== null){
@@ -156,8 +116,8 @@ class User extends Authenticatable
         return null;
     }
 
-    public function solutionTime(){
-        $statuses = $this->statuses()->where('status', 4)->get();
+    public function solutionTime($user){
+        $statuses = $user->statuses()->where('status', 4)->get();
         $sum = 0;
         $count = 0;
 
@@ -195,14 +155,6 @@ class User extends Authenticatable
         return $count > 0 ? ($sum / $count) : null;
     }
 
-    public function isAdmin()
-    {
 
-        return ($this->areas()->withoutGlobalScope('not_global')->count() > 0);
-    }
 
-    public function isSuperAdmin()
-    {
-        return $this->superadmin;
-    }
 }

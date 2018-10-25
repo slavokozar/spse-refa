@@ -30,6 +30,9 @@
                         <th>
                             Priemerna doba odozvy
                         </th>
+                        <th>
+                            Priemerna doba vyriesenia
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,10 +40,11 @@
                         <tr>
                             <th>{{ ucfirst($user->name) }}</th>
                             <td>{{ $user->tickets()->count() }}</td>
-                            <td>{{ $user->processingTickets() }}</td>
-                                <td>{{ $user->transferedTickets() }}</td>
-                                <td>{{ $user->solvedTickets() }}</td>
-
+                            <td>{{ UserStatsService::processingTickets($user) }}</td>
+                            <td>{{ UserStatsService::transferedTickets($user) }}</td>
+                            <td>{{ UserStatsService::solvedTickets($user) }}</td>
+                            <td>{{ TimeService::humanDiff(UserStatsService::firstReactionTime($user)) }}</td>
+                            <td>{{ TimeService::humanDiff(UserStatsService::solutionTime($user)) }}</td>
                         </tr>
                     @endforeach
                     </tbody>
