@@ -38,4 +38,9 @@ class Ticket extends Model
     public function status(){
         return $this->statuses()->orderBy('created_at', 'desc')->limit(1);
     }
+
+    public function actualStatus(){
+        return $this->status()->first();
+    }
+
 }

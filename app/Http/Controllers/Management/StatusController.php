@@ -41,8 +41,8 @@ class StatusController
 
             // presun poziadavky na vyssi level
 
-            $oldLevel = $ticketObj->status()->level;
-            $newLevel = $ticketObj->status()->level + 1;
+            $oldLevel = $ticketObj->actualStatus()->level;
+            $newLevel = $ticketObj->actualStatus()->level + 1;
 
             //presun na vyssiu uroven
             $ticketStatus = TicketStatus::create([
@@ -96,7 +96,7 @@ class StatusController
                 'ticket_id' => $ticketObj->id,
                 'user_id' => Auth::user()->id,
                 'status' => $data['status'],
-                'level' => $ticketObj->status()->level,
+                'level' => $ticketObj->actualStatus()->level,
                 'description' => $data['description']
             ]);
 
@@ -117,13 +117,13 @@ class StatusController
                 Auth::user()->notify(new Manager\TicketUpdated($ticketObj));
 
                 $managers = $ticketObj->area->
-                    managers()->wherePivot('level', $ticketObj->status()->level)
+                    managers()->wherePivot('level', $ticketObj->actualStatus()->level)
                     ->where('users.id', '!=', Auth::user()->id)->get();
 
                 if ($managers->count() == 0) {
 
                     $managers = Area::withoutGlobalScope('not_global')->find(1)
-                        ->managers()->wherePivot('level', $ticketObj->status()->level)
+                        ->managers()->wherePivot('level', $ticketObj->actualStatus()->level)
                         ->where('users.id', '!=', Auth::user()->id)->get();
                 }
 

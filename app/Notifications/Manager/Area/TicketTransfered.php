@@ -43,7 +43,7 @@ class TicketTransfered extends Notification
         return (new MailMessage)
                     ->subject('Presunutá požiadavka vo Vašej učebni - ' . $this->ticketObj->area->name . ' - PC' . $this->ticketObj->pc )
                     ->greeting('Zdravím ' . $notifiable->name)
-                    ->line('V učebni ' . $this->ticketObj->area->name . ', ktorú spravujete bola presunutá požiadavka na úroveň ' . $this->ticketObj->status()->level . '.')
+                    ->line('V učebni ' . $this->ticketObj->area->name . ', ktorú spravujete bola presunutá požiadavka na úroveň ' . $this->ticketObj->actualStatus()->level . '.')
                     ->action('Detail požiadavky', action('Tickets\TicketController@show',[$this->ticketObj->id]))
                     ->line('O ďalších zmenách stavu požiadavky budete informovaní emailom.')
                     ->line('Ďakujeme za používanie ReFa!')

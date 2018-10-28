@@ -85,7 +85,7 @@
 
                 @foreach($tickets as $ticket)
                     <a href="{{ action('Management\TicketController@show',[$ticket->id]) }}">
-                        <div class="ticket ticket-{{$ticket->status()->first()->cssClass()}}">
+                        <div class="ticket ticket-{{$ticket->actualStatus()->cssClass()}}">
                             <div class="row">
                                 <div class="col-xs-2 col-sm-1">
                                     <strong>{{$ticket->area->name}}</strong>
@@ -94,11 +94,11 @@
                                     <strong>{{$ticket->pc}}</strong>
                                 </div>
                                 <div class="col-xs-4 col-sm-2 col-sm-push-6">
-                                    <strong>{{$ticket->status()->first()->name()}} - Úroveň {{$ticket->status()->first()->level}}</strong>
+                                    <strong>{{$ticket->actualStatus()->name()}} - Úroveň {{$ticket->actualStatus()->level}}</strong>
                                 </div>
                                 <div class="col-xs-4 col-sm-2 col-sm-push-6">
-                                    <div class="text-muted"><b>{{$ticket->status()->first()->user->name}}</b></div>
-                                    <div class="text-muted" style="margin-top: -2px">({{$ticket->status()->first()->created_at}}
+                                    <div class="text-muted"><b>{{$ticket->actualStatus()->user->name}}</b></div>
+                                    <div class="text-muted" style="margin-top: -2px">({{$ticket->actualStatus()->created_at}}
                                         )
                                     </div>
 

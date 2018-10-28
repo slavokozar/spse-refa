@@ -43,7 +43,7 @@ class TicketSolved extends Notification
         return (new MailMessage)
             ->subject('Vaša požiadavka bola vyriešená - ' . $this->ticketObj->area->name . ' - PC' . $this->ticketObj->pc )
             ->greeting('Zdravím ' . $notifiable->name)
-            ->line('Používateľ '. $this->ticketObj->status()->user->name .' práve označil Vašu požiadavku za vyriešenú.')
+            ->line('Používateľ '. $this->ticketObj->actualStatus()->user->name .' práve označil Vašu požiadavku za vyriešenú.')
             ->action('Detail požiadavky', action('Tickets\TicketController@show',[$this->ticketObj->id]))
             ->line('Ďakujeme za používanie ReFa!')
             ->line('V prípade, že ste túto požiadavku nevytvorili Vy, kontaktujte správcu systému.');

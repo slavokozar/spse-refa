@@ -25,7 +25,7 @@
     <tr>
         <td>Stav</td>
         <td>
-            {{$ticket->status()->name()}} - Úroveň {{$ticket->status()->level}}
+            {{$ticket->actualStatus()->name()}} - Úroveň {{$ticket->actualStatus()->level}}
         </td>
     </tr>
 
