@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Management;
 use App\Http\Controllers\Controller;
 use App\Models\Area;
 use App\Models\Ticket;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -100,10 +101,15 @@ class TicketController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $ticketObj = Ticket::findOrFail($id);
-        return view('management.tickets.show', compact(['ticketObj']));
+
+        if($request->ajax()){
+            return view('management.tickets.modal', compact(['ticketObj']));
+        }else{
+            return view('management.tickets.show', compact(['ticketObj']));
+        }
     }
 
 }

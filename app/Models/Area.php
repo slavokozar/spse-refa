@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Area extends Model
 {
@@ -23,6 +24,13 @@ class Area extends Model
 
     public function managers(){
         return $this->belongsToMany('App\Models\User')->withPivot('level');
+    }
+
+    public function getTicketAtAttribute($value){
+        if($value == null) return null;
+
+        setlocale(LC_TIME, 'Slovak');
+        return Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('H:i d.m.Y');
     }
 
     protected static function boot()

@@ -15,7 +15,7 @@ class Ticket extends Model
 
     public function getCreatedAtAttribute($value){
         setlocale(LC_TIME, 'Slovak');
-        return Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('H:i d. m. Y');
+        return Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('H:i d.m.Y');
     }
 
     public function user(){

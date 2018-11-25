@@ -13,6 +13,7 @@ use App\Models\TicketStatus;
 use App\Notifications\User;
 use App\Notifications\Manager;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 
@@ -85,9 +86,14 @@ class TicketController extends Controller
     /**
      * Display the specific Ticket
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $ticketObj = Ticket::findOrFail($id);
-        return view('tickets.show', compact(['ticketObj']));
+
+        if($request->ajax()){
+            return view('tickets.history', compact(['ticketObj']));
+        }else{
+            return view('tickets.show', compact(['ticketObj']));
+        }
     }
 }

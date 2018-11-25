@@ -13,30 +13,6 @@ use App\Models\Ticket;
 
 class UserStatsService
 {
-    public function processingTickets($user)
-    {
-        return $tickets = Ticket::select(['*',])
-            ->whereRaw('(select "status" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [2])
-            ->whereRaw('(select "user_id" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [$user->id])
-            ->count();
-    }
-
-    public function transferedTickets($user)
-    {
-        return $tickets = Ticket::select(['*',])
-            ->whereRaw('(select "status" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [3])
-            ->whereRaw('(select "user_id" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [$user->id])
-            ->count();
-    }
-
-    public function solvedTickets($user)
-    {
-        return $tickets = Ticket::select(['*',])
-            ->whereRaw('(select "status" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [4])
-            ->whereRaw('(select "user_id" FROM "ticket_status" WHERE "tickets"."id" = "ticket_status"."ticket_id" order by "created_at" desc limit 1) = ?', [$user->id])
-            ->count();
-    }
-
     private function firstReactionAfterCreationTime($user)
     {
         $sum = 0;

@@ -32,11 +32,19 @@ Route::get('/', function () {
 
 
 
+
+//  Stats
+    Route::get('stats/users', 'Stats\UserStatsController@index');
+    Route::get('stats/users/{user}', 'Stats\UserStatsController@show');
+    Route::get('stats/users/{user}/created', 'Stats\UserStatsController@created');
+    Route::get('stats/users/{user}/updated', 'Stats\UserStatsController@updated');
+    Route::get('stats/users/{user}/solved', 'Stats\UserStatsController@solved');
+
+
+    Route::get('stats/areas', 'Stats\AreaStatsController@index');
+    Route::get('stats/areas/{area}', 'Stats\AreaStatsController@show');
+
 //  Settings
-
-    Route::get('stats/users', 'StatsController@users');
-    Route::get('stats/areas', 'StatsController@areas');
-
 
     Route::get(trans('routes.settings.index'), 'Settings\SettingsController@index');
 
@@ -60,5 +68,6 @@ Route::get('/', function () {
     Route::put(trans('routes.settings.failures.update'), 'Settings\FailureController@update');
     Route::get(trans('routes.settings.failures.delete'), 'Settings\FailureController@delete');
     Route::delete(trans('routes.settings.failures.destroy'), 'Settings\FailureController@destroy');
+
 
 

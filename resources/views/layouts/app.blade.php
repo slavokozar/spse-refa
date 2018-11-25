@@ -35,10 +35,10 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Statistiky <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="{{ action('StatsController@users') }}">Uzivatelia</a>
+                                    <a href="{{ action('Stats\UserStatsController@index') }}">Uzivatelia</a>
                                 </li>
                                 <li>
-                                    <a href="{{ action('StatsController@areas') }}">Miestnosti</a>
+                                    <a href="{{ action('Stats\AreaStatsController@index') }}">Miestnosti</a>
                                 </li>
                             </ul>
                         </li>

@@ -12,23 +12,37 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
+                        <th rowspan="2">
+                            {!! Filter::sortable('Ucebna', 'name', true) !!}
+                        </th>
+                        <th colspan="3" class="text-center">
+                            Poziadavky
+                        </th>
+                    </tr>
+                    <tr>
                         <th>
-                            Ucebna
+                            {!! Filter::sortable('Vytvorenych', 'created_tickets') !!}
                         </th>
                         <th>
-                            Vytvorenych poziadaviek
+                            {!! Filter::sortable('Vyriesenych', 'solved_tickets') !!}
                         </th>
                         <th>
-                            Vyriesenych poziadaviek
+                            {!! Filter::sortable('Posledna', 'ticket_at') !!}
                         </th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($areas as $area)
                         <tr>
-                            <th>{{ ucfirst($area->name) }}</th>
-                            <td>{{ $area->tickets()->count() }}</td>
-                            <td>{{ $area->solvedTickets()->count() }}</td>
+                            <th>
+                                <a href="{{ action('Stats\AreaStatsController@show', [$area->id]) }}">
+                                    {{ ucfirst($area->name) }}
+                                </a>
+                            </th>
+
+                            <td>{{ $area->created_tickets }}</td>
+                            <td>{{ $area->solved_tickets }}</td>
+                            <td>{{ $area->ticket_at }}</td>
                         </tr>
                     @endforeach
                     </tbody>
