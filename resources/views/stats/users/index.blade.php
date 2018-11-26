@@ -47,10 +47,27 @@
                                     {{ ucfirst($user->name) }}
                                 </a>
                             </th>
-                            <td>{{ $user->created_tickets }}</td>
-                            <td>{{ $user->processing_tickets }}</td>
-                            <td>{{ $user->transfered_tickets }}</td>
-                            <td>{{ $user->solved_tickets }}</td>
+                            <td>
+                                <a href="{{ Action('Stats\UserStatsController@created', [$user->id])  }}">
+                                    {{ $user->created_tickets }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ Action('Stats\UserStatsController@updated', [$user->id])  }}">
+                                    {{ $user->processing_tickets }}
+                                </a>
+                            </td>
+
+                            <td>
+                                <a href="{{ Action('Stats\UserStatsController@updated', [$user->id])  }}">
+                                    {{ $user->transfered_tickets }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ Action('Stats\UserStatsController@solved', [$user->id])  }}">
+                                    {{ $user->solved_tickets }}
+                                </a>
+                            </td>
                             <td>{{ TimeService::humanDiff(UserStatsService::firstReactionTime($user)) }}</td>
                             <td>{{ TimeService::humanDiff(UserStatsService::solutionTime($user)) }}</td>
                         </tr>
