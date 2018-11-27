@@ -60,19 +60,17 @@ class StatusController
             Auth::user()->notify(new Manager\TicketTransfered($ticketObj));
 
 
-
-
             //notifikacia pre vsetkych adminov urovne $oldLevel
             $managers = $ticketObj->area->managers()
                 ->where('users.id', '!=', Auth::user()->id)
                 ->wherePivot('level', $oldLevel)->get();
 
-            if ($managers->count() == 0) {
-
-                $managers = Area::withoutGlobalScope('not_global')->find(1)
+            $managers = $managers->concat(
+                Area::withoutGlobalScope('not_global')->find(1)
                     ->managers()->where('users.id', '!=', Auth::user()->id)
-                    ->wherePivot('level', $oldLevel)->get();
-            }
+                    ->wherePivot('level', $oldLevel)->get()
+            );
+
 
             Notification::send($managers, new Manager\Area\TicketTransfered($ticketObj));
 
@@ -81,12 +79,11 @@ class StatusController
                 ->managers()->wherePivot('level', $newLevel)
                 ->where('users.id', '!=', Auth::user()->id)->get();
 
-            if ($managers->count() == 0) {
-
-                $managers = Area::withoutGlobalScope('not_global')->find(1)
+            $managers = $managers->concat(
+                Area::withoutGlobalScope('not_global')->find(1)
                     ->managers()->wherePivot('level', $newLevel)
-                    ->where('users.id', '!=', Auth::user()->id)->get();
-            }
+                    ->where('users.id', '!=', Auth::user()->id)->get()
+            );
 
             Notification::send($managers, new Manager\Area\TicketTransfered($ticketObj));
 
@@ -117,15 +114,14 @@ class StatusController
                 Auth::user()->notify(new Manager\TicketUpdated($ticketObj));
 
                 $managers = $ticketObj->area->
-                    managers()->wherePivot('level', $ticketObj->actualStatus()->level)
+                managers()->wherePivot('level', $ticketObj->actualStatus()->level)
                     ->where('users.id', '!=', Auth::user()->id)->get();
 
-                if ($managers->count() == 0) {
-
-                    $managers = Area::withoutGlobalScope('not_global')->find(1)
+                $managers = $managers->concat(
+                    Area::withoutGlobalScope('not_global')->find(1)
                         ->managers()->wherePivot('level', $ticketObj->actualStatus()->level)
-                        ->where('users.id', '!=', Auth::user()->id)->get();
-                }
+                        ->where('users.id', '!=', Auth::user()->id)->get()
+                );
 
                 Notification::send($managers, new Manager\Area\TicketUpdated($ticketObj));
             }

@@ -75,9 +75,8 @@ class TicketController extends Controller
         Auth::user()->notify(new User\TicketCreated($ticketObj));
 
         $managers = $ticketObj->area->managers()->wherePivot('level', 1)->get();
-        if ($managers->count() == 0) {
-            $managers = Area::withoutGlobalScope('not_global')->find(1)->managers()->wherePivot('level', 1)->get();
-        }
+        $managers = $managers->concat(Area::withoutGlobalScope('not_global')->find(1)->managers()->wherePivot('level', 1)->get());
+
         Notification::send($managers, new Manager\Area\TicketCreated($ticketObj));
 
         return redirect(action('Tickets\TicketController@index'));
